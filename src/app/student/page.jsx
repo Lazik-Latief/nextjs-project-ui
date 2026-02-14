@@ -26,10 +26,14 @@ export default function StudentDashboardPage() {
 
         <div className="flex justify-between items-start">
           <TopHeader />
-          <StreakCard />
+          
+        </div>
+        <div>
+          <UrgentBanner />
+          
         </div>
 
-        <UrgentBanner />
+        
         <ContinueLearning />
         <SubjectsSection />
 

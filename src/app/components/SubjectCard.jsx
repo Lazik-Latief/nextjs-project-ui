@@ -1,32 +1,80 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BookOpen } from 'lucide-react';
+import {
+  BookOpen,
+  Languages,
+  Landmark,
+  Atom,
+  Sigma,
+} from 'lucide-react';
+
+const subjectConfig = {
+  English: {
+    icon: Languages,
+    image: '/subjects/english.png',
+  },
+  Math: {
+    icon: Sigma,
+    image: '/subjects/math.png',
+  },
+  Science: {
+    icon: Atom,
+    image: '/subjects/science.png',
+  },
+  History: {
+    icon: Landmark,
+    image: '/subjects/history.png',
+  },
+  Urdu: {
+    icon: BookOpen,
+    image: '/subjects/urdu.png',
+  },
+};
 
 export default function SubjectCard({ name, lessons }) {
+  const config = subjectConfig[name] || {};
+  const Icon = config.icon || BookOpen;
+
   return (
     <motion.div
-      whileHover={{ y: -6 }}
+      whileHover={{ scale: 1.05 }}
       transition={{ type: 'spring', stiffness: 200 }}
-      className="bg-[#111112] border border-white/5 
-                 rounded-3xl p-6
-                 hover:border-yellow-400/30
-                 hover:shadow-[0_0_30px_rgba(234,179,8,0.1)]
-                 transition-all duration-300"
+      className="relative h-64 rounded-3xl overflow-hidden group cursor-pointer"
     >
-      <div className="w-12 h-12 rounded-full bg-yellow-500/10 
-                      border border-yellow-400/20 
-                      flex items-center justify-center mb-5">
-        <BookOpen size={20} className="text-yellow-400" />
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+        style={{
+          backgroundImage: `url(${config.image})`,
+        }}
+      />
+
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
+
+      {/* Content */}
+      <div className="relative z-10 h-full flex flex-col justify-end p-6">
+
+        {/* Icon */}
+        <div className="w-12 h-12 rounded-full 
+                        bg-yellow-500/20 
+                        border border-yellow-400/40
+                        flex items-center justify-center mb-4
+                        backdrop-blur-md
+                        shadow-lg shadow-yellow-500/30">
+          <Icon size={22} className="text-yellow-400" />
+        </div>
+
+        <h4 className="text-white text-xl font-semibold">
+          {name}
+        </h4>
+
+        <p className="text-neutral-300 text-sm">
+          {lessons} Lessons
+        </p>
+
       </div>
-
-      <h4 className="text-white font-semibold text-lg">
-        {name}
-      </h4>
-
-      <p className="text-neutral-500 text-sm mt-1">
-        {lessons} Lessons
-      </p>
     </motion.div>
   );
 }

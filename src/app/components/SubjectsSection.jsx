@@ -12,13 +12,15 @@ export default function SubjectsSection() {
   ];
 
   return (
-    <section className="mt-6">
+    <section className="mt-10">
 
-      <h3 className="text-2xl font-semibold mb-8">
-        My Subjects
-      </h3>
+      <div className="flex justify-between items-center mb-8">
+        <h3 className="text-2xl font-semibold">
+          My Subjects
+        </h3>
+      </div>
 
-      <div className="grid md:grid-cols-2 xl:grid-cols-5 gap-8">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10">
         {subjects.map((subject, index) => (
           <SubjectCard key={index} {...subject} />
         ))}
