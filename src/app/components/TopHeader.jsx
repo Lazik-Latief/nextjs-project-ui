@@ -53,7 +53,7 @@ export default function TopHeader() {
       className="absolute right-10 top-4 flex gap-6"
       animate={{ y: [0, -10, 0] }}
       transition={{
-        duration: 2,
+        duration: 1.4,
         repeat: Infinity,
         ease: 'easeInOut',
       }}
