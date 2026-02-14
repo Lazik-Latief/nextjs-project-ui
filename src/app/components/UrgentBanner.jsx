@@ -1,20 +1,29 @@
-// features/student/dashboard/components/UrgentBanner.jsx
 'use client';
 
 export default function UrgentBanner() {
   return (
-    <div className="mt-6 bg-yellow-500/10 border border-yellow-400 rounded-2xl p-6 flex justify-between items-center shadow-lg">
-      <div>
-        <h3 className="text-yellow-400 font-semibold text-sm uppercase">
-          Urgent Attention Required
-        </h3>
-        <p className="text-neutral-300 text-sm mt-2">
-          You are currently behind 109 students in your batch.
-        </p>
+    <div className="relative rounded-3xl p-6 
+                    bg-gradient-to-r from-yellow-500/10 to-yellow-400/5
+                    border border-yellow-400/30
+                    shadow-[0_0_40px_rgba(234,179,8,0.15)]">
+
+      <div className="flex justify-between items-center">
+
+        <div>
+          <h3 className="text-yellow-400 font-semibold uppercase text-sm tracking-wide">
+            Urgent Attention Required
+          </h3>
+
+          <p className="text-neutral-300 mt-2 text-sm">
+            You are currently behind <span className="text-yellow-400 font-medium">109 students</span> in your batch.
+          </p>
+        </div>
+
+        <button className="bg-white text-black px-6 py-2.5 rounded-full font-semibold hover:opacity-90 transition">
+          Catch Up Now
+        </button>
+
       </div>
-      <button className="bg-yellow-400 text-black font-semibold px-6 py-2 rounded-xl hover:bg-yellow-300 transition">
-        Catch Up Now
-      </button>
     </div>
   );
 }

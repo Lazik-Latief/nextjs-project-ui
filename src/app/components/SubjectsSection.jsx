@@ -1,4 +1,3 @@
-// features/student/dashboard/components/SubjectsSection.jsx
 'use client';
 
 import SubjectCard from './SubjectCard';
@@ -13,13 +12,18 @@ export default function SubjectsSection() {
   ];
 
   return (
-    <div className="mt-12">
-      <h3 className="text-white text-xl font-semibold mb-6">My Subjects</h3>
-      <div className="grid md:grid-cols-2 xl:grid-cols-5 gap-6">
+    <section className="mt-6">
+
+      <h3 className="text-2xl font-semibold mb-8">
+        My Subjects
+      </h3>
+
+      <div className="grid md:grid-cols-2 xl:grid-cols-5 gap-8">
         {subjects.map((subject, index) => (
           <SubjectCard key={index} {...subject} />
         ))}
       </div>
-    </div>
+
+    </section>
   );
 }
