@@ -108,7 +108,7 @@ export default function Sidebar() {
     },
     {
       label: 'My Subjects',
-      href: '#',
+      href: '/student/subjects',
       icon: BookOpen,
     },
     {

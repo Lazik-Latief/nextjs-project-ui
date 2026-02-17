@@ -1,14 +1,14 @@
 // features/student/dashboard/page.jsx
 'use client';
 
-import Sidebar from '../components/Sidebar';
-import TopHeader from '../components/TopHeader';
-import StreakCard from '../components/StreakCard';
-import UrgentBanner from '../components/UrgentBanner';
-import ContinueLearning from '../components/ContinueLearning';
-import SubjectsSection from '../components/SubjectsSection';
-import ProgressCard from '../components/ProgressCard';
-import UpcomingTasks from '../components/UpcomingTasks';
+import Sidebar from '../../components/Sidebar';
+import TopHeader from '../../components/TopHeader';
+import StreakCard from '../../components/StreakCard';
+import UrgentBanner from '../../components/UrgentBanner';
+import ContinueLearning from '../../components/ContinueLearning';
+import SubjectsSection from '../../components/SubjectsSection';
+import ProgressCard from '../../components/ProgressCard';
+import UpcomingTasks from '../../components/UpcomingTasks';
 
 export default function StudentDashboardPage() {
   return (

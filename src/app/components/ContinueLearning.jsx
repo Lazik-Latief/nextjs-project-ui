@@ -73,7 +73,8 @@ export default function ContinueLearning() {
                   <img
                     src={course.image}
                     alt={course.title}
-                    fill
+                     fill="true" 
+
                     className="object-cover transition-all duration-700 
                                group-hover:scale-110"
                   />
