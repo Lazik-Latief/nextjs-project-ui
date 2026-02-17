@@ -1,68 +1,3 @@
-// // features/student/dashboard/components/Sidebar.jsx
-// 'use client';
-
-// import Link from 'next/link';
-// import { usePathname } from 'next/navigation';
-
-// export default function Sidebar() {
-//   const pathname = usePathname();
-
-//   const items = [
-//     { label: 'Dashboard', href: '/student/dashboard', icon: '📊' },
-//     { label: 'My Subjects', href: '#', icon: '📘' },
-//     { label: 'Continue Learning', href: '#', icon: '▶️' },
-//     { label: 'Progress', href: '#', icon: '📈' },
-//     { label: 'Library', href: '#', icon: '📚' },
-//   ];
-
-//   return (
-//     <aside className="w-64 min-h-screen bg-black border-r border-yellow-500/10 p-6 flex flex-col">
-//       <div className="mb-10">
-//         <h1 className="text-yellow-400 font-bold text-xl tracking-wide">
-//           KOSHUR
-//         </h1>
-//         <p className="text-md text-yellow-500/89">SCIENTIST</p>
-//       </div>
-
-//       <div className="mb-8 flex items-center gap-3 bg-neutral-900 rounded-xl p-3">
-//         <div className="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center text-black font-bold">
-//           L
-//           {/* <img src="file.svg" alt="" srcset="" /> */}
-//         </div>
-//         <div>
-//           <p className="text-sm font-medium text-white">Lazik</p>
-//           <p className="text-xs text-neutral-400">Class 10 Student</p>
-//         </div>
-//       </div>
-
-//       <nav className="flex flex-col gap-2">
-//         {items.map((item, index) => {
-//           const active = pathname === item.href;
-//           return (
-//             <Link
-//               key={index}
-//               href={item.href}
-//               className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all duration-200 ${
-//                 active
-//                   ? 'bg-yellow-400 text-black font-semibold'
-//                   : 'text-neutral-400 hover:bg-neutral-900 hover:text-yellow-400'
-//               }`}
-//             >
-//               <span>{item.icon}</span>
-//               {item.label}
-//             </Link>
-//           );
-//         })}
-//       </nav>
-
-//       <div className="mt-auto text-neutral-500 text-sm pt-10">
-//         Sign Out
-//       </div>
-//     </aside>
-//   );
-// }
-
-
 'use client';
 
 import Link from 'next/link';
@@ -91,24 +26,26 @@ import {
 
 export default function Sidebar() {
   const pathname = usePathname();
+  
 
   // Static Data (Replace with API later)
   const student = {
     name: 'Lazik Latief',
     role: 'Class 10 Student',
     image:
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   };
 
   const items = [
     {
       label: 'Dashboard',
-      href: '/student/dashboard',
+      href: '/dashboard/student',
       icon: LayoutDashboard,
     },
     {
       label: 'My Subjects',
-      href: '/student/subjects',
+      href: '/dashboard/student/subjects',
+
       icon: BookOpen,
     },
     {
