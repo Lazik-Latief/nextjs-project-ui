@@ -1,48 +1,44 @@
-// features/student/dashboard/page.jsx
 'use client';
 
-import Sidebar from '../../components/Sidebar';
-import TopHeader from '../../components/TopHeader';
-import StreakCard from '../../components/StreakCard';
-import UrgentBanner from '../../components/UrgentBanner';
-import ContinueLearning from '../../components/ContinueLearning';
-import SubjectsSection from '../../components/SubjectsSection';
-import ProgressCard from '../../components/ProgressCard';
-import UpcomingTasks from '../../components/UpcomingTasks';
+import TopHeader from '@/app/components/TopHeader';
+import UrgentBanner from '@/app/components/UrgentBanner';
+import ContinueLearning from '@/app/components/ContinueLearning';
+import SubjectsSection from '@/app/components/SubjectsSection';
+import ProgressCard from '@/app/components/ProgressCard';
+import UpcomingTasks from '@/app/components/UpcomingTasks';
+import Sidebar from '@/app/components/Sidebar';
 
 export default function StudentDashboardPage() {
   return (
-    <div className="flex min-h-screen bg-[#0b0b0c] text-white">
-
-      {/* Subtle yellow glow background */}
+    <>
+      {/* Background Glow */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute top-0 left-1/3 w-[600px] h-[600px] bg-yellow-500/5 blur-[180px] rounded-full" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-yellow-400/5 blur-[160px] rounded-full" />
+        <div className="absolute top-0 left-1/3 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-yellow-500/5 blur-[140px] md:blur-[180px] rounded-full" />
+        <div className="absolute bottom-0 right-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-yellow-400/5 blur-[120px] md:blur-[160px] rounded-full" />
       </div>
 
-      <Sidebar />
-
-      <main className="flex-1 px-14 py-10 space-y-10 overflow-y-auto">
-
-        <div className="flex justify-between items-start">
-          <TopHeader />
           
-        </div>
-        <div>
-          <UrgentBanner />
-          
-        </div>
+            
+            
+           
 
+      <div className="space-y-8 md:space-y-10">
         
+        <TopHeader />
+
+        <UrgentBanner />
+
         <ContinueLearning />
+
         <SubjectsSection />
 
-        <div className="grid xl:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
           <ProgressCard />
           <UpcomingTasks />
         </div>
 
-      </main>
-    </div>
+      </div>
+       
+    </>
   );
 }

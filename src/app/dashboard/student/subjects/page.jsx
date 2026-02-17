@@ -7,9 +7,7 @@ export default function SubjectsPage() {
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-black via-neutral-950 to-black">
 
-      {/* Sidebar */}
-      <Sidebar />
-
+    
       {/* Main Content */}
       <main className="flex-1 px-16 py-14">
 

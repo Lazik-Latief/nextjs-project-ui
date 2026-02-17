@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard,
   BookOpen,
@@ -10,160 +10,135 @@ import {
   BarChart3,
   Library,
   LogOut,
+  X,
 } from 'lucide-react';
 
-/**
- * NOTE:
- * In future, fetch user data from API like this:
- *
- * const { data } = useGetStudentProfileQuery();
- *
- * <img src={data?.profileImage} alt={data?.name} />
- * <p>{data?.name}</p>
- *
- * For now we are using static data.
- */
-
-export default function Sidebar() {
+export default function Sidebar({ open, setOpen }) {
   const pathname = usePathname();
-  
-
-  // Static Data (Replace with API later)
-  const student = {
-    name: 'Lazik Latief',
-    role: 'Class 10 Student',
-    image:
-      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  };
 
   const items = [
-    {
-      label: 'Dashboard',
-      href: '/dashboard/student',
-      icon: LayoutDashboard,
-    },
-    {
-      label: 'My Subjects',
-      href: '/dashboard/student/subjects',
-
-      icon: BookOpen,
-    },
-    {
-      label: 'Continue Learning',
-      href: '#',
-      icon: PlayCircle,
-    },
-    {
-      label: 'Progress',
-      href: '#',
-      icon: BarChart3,
-    },
-    {
-      label: 'Library',
-      href: '#',
-      icon: Library,
-    },
+    { label: 'Dashboard', href: '/dashboard/student', icon: LayoutDashboard },
+    { label: 'My Subjects', href: '/dashboard/student/subjects', icon: BookOpen },
+    { label: 'Continue Learning', href: '#', icon: PlayCircle },
+    { label: 'Progress', href: '#', icon: BarChart3 },
+    { label: 'Library', href: '#', icon: Library },
   ];
 
   return (
-    <aside className="relative w-80 min-h-screen flex flex-col px-8 py-10 bg-gradient-to-br from-neutral-950 via-neutral-900 to-black border-r border-yellow-500/10 overflow-hidden">
-      {/* Animated Background Blobs */}
-      <motion.div
-        animate={{ y: [0, -20, 0], x: [0, 20, 0] }}
-        transition={{ duration: 12, repeat: Infinity }}
-        className="absolute -top-20 -left-20 w-72 h-72 bg-yellow-500/10 rounded-full blur-3xl"
-      />
-      <motion.div
-        animate={{ y: [0, 30, 0], x: [0, -30, 0] }}
-        transition={{ duration: 18, repeat: Infinity }}
-        className="absolute bottom-0 right-0 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl"
-      />
+    <>
+      {/* Overlay (Mobile Only) */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 bg-black z-40 lg:hidden"
+          />
+        )}
+      </AnimatePresence>
 
-      {/* Logo Section */}
-      <div className="mb-14 relative z-10">
-        <h1 className="text-3xl font-extrabold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent tracking-wide">
-          KOSHUR
-        </h1>
-        <p className="text-lg font-semibold text-neutral-300 tracking-wider">
-          SCIENTIST
-        </p>
-      </div>
+      {/* Sidebar */}
+      <motion.aside
+        initial={false}
+        className={`
+          fixed top-0 left-0
+          w-80 h-screen
+          z-50
+          bg-gradient-to-b from-neutral-950 via-black to-neutral-900
+          border-r border-yellow-500/20
+          flex flex-col
+          px-6 py-8
+          transform transition-transform duration-300 ease-in-out
 
-      {/* Profile Card */}
-      <motion.div
-        whileHover={{ scale: 1.03 }}
-        className="relative z-10 mb-12 flex items-center gap-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-lg hover:shadow-yellow-500/20 transition-all duration-300"
+          ${open ? 'translate-x-0' : '-translate-x-full'}
+          lg:translate-x-0
+        `}
       >
-        <motion.img
-          whileHover={{ rotate: 5, scale: 1.05 }}
-          src={student.image}
-          alt={student.name}
-          className="w-14 h-14 rounded-full object-cover border-2 border-yellow-400 shadow-md"
-        />
-        <div>
-          <p className="text-base font-bold text-white tracking-wide">
-            {student.name}
-          </p>
-          <p className="text-sm text-neutral-400 font-medium">
-            {student.role}
+        {/* Close Button (Mobile) */}
+        <div className="flex justify-end lg:hidden mb-6">
+          <button
+            onClick={() => setOpen(false)}
+            className="text-neutral-400 hover:text-white transition"
+          >
+            <X size={22} />
+          </button>
+        </div>
+
+        {/* Logo */}
+        <div className="mb-14">
+          <h1 className="text-3xl font-extrabold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+            KOSHUR
+          </h1>
+          <p className="text-neutral-400 text-sm tracking-widest">
+            SCIENTIST
           </p>
         </div>
-      </motion.div>
 
-      {/* Navigation */}
-      <nav className="flex flex-col gap-3 relative z-10">
-        {items.map((item, index) => {
-          const active = pathname === item.href;
-          const Icon = item.icon;
+        {/* Navigation */}
+        <nav className="flex flex-col gap-5">
+          {items.map((item, index) => {
+            const active = pathname === item.href;
+            const Icon = item.icon;
 
-          return (
-            <motion.div
-              key={index}
-              whileHover={{ x: 6 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
+            return (
               <Link
+                key={index}
                 href={item.href}
-                className={`group flex items-center gap-4 px-5 py-3 rounded-2xl text-base font-semibold transition-all duration-300 ${
-                  active
-                    ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-black shadow-lg shadow-yellow-500/30'
-                    : 'text-neutral-300 hover:bg-white/5 hover:text-white'
-                }`}
+                onClick={() => setOpen(false)}
               >
                 <motion.div
-                  whileHover={{ scale: 1.2, rotate: 10 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                  className={`p-2 rounded-xl transition-all duration-300 ${
-                    active
-                      ? 'bg-black/20'
-                      : 'bg-white/5 group-hover:bg-yellow-500/10'
-                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.97 }}
+                  className={`
+                    group relative flex items-center gap-5
+                    px-6 py-5 rounded-2xl
+                    text-lg font-semibold
+                    transition-all duration-300
+                    overflow-hidden
+                    ${
+                      active
+                        ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-black shadow-2xl shadow-yellow-500/40'
+                        : 'bg-white/5 text-neutral-300 hover:bg-white/10 hover:text-white'
+                    }
+                  `}
                 >
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition duration-500
+                                  bg-gradient-to-r from-yellow-500/20 to-orange-500/20 blur-xl" />
+
                   <Icon
-                    size={20}
-                    className={`transition-all duration-300 ${
+                    size={26}
+                    className={`relative z-10 ${
                       active
                         ? 'text-black'
                         : 'text-yellow-400 group-hover:text-yellow-300'
                     }`}
                   />
+
+                  <span className="relative z-10">
+                    {item.label}
+                  </span>
                 </motion.div>
-
-                {item.label}
               </Link>
-            </motion.div>
-          );
-        })}
-      </nav>
+            );
+          })}
+        </nav>
 
-      {/* Sign Out */}
-      <motion.div
-        whileHover={{ scale: 1.05 }}
-        className="mt-auto pt-12 text-neutral-400 text-base font-medium flex items-center gap-3 cursor-pointer hover:text-red-400 transition-all duration-300 relative z-10"
-      >
-        <LogOut size={20} />
-        Sign Out
-      </motion.div>
-    </aside>
+        {/* Sign Out */}
+        <div className="mt-auto pt-12">
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-4 px-6 py-4
+                       rounded-2xl bg-red-500/10
+                       text-red-400 hover:bg-red-500/20
+                       transition cursor-pointer"
+          >
+            <LogOut size={22} />
+            <span className="text-lg font-medium">Sign Out</span>
+          </motion.div>
+        </div>
+      </motion.aside>
+    </>
   );
 }
