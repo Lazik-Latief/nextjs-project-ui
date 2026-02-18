@@ -1,9 +1,7 @@
 'use client';
 
-import { useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { subjects } from "@/lib/data/subjects";
 import {
   Bell,
   User,
@@ -13,24 +11,28 @@ import {
   CheckCircle,
   BookOpen,
 } from "lucide-react";
-import { notFound } from "next/navigation";
+import { coursesData } from "../data";
 
-export default function SubjectLayout({ children }) {
+/*
+=================================================
+COURSE LAYOUT
+Location:
+app/dashboard/student/courses/[slug]/layout.jsx
+=================================================
+*/
+
+export default function CourseLayout({ children }) {
   const { slug } = useParams();
 
-  const subject = subjects.find((s) => s.slug === slug);
-  if (!subject) return notFound();
+  const course = coursesData.find((c) => c.slug === slug);
 
-  // 🔥 SCROLL FIX — THIS IS THE IMPORTANT PART
-  useEffect(() => {
-    const main = document.querySelector("main");
-    if (main) {
-      main.scrollTop = 0;
-    }
-  }, []);
+  if (!course) {
+    return <div className="p-10 text-white">Course not found</div>;
+  }
 
-  const totalLectures = subject.lectures.length;
-  const completedLectures = subject.lectures.filter(
+  const totalLectures = course.lectures.length;
+
+  const completedLectures = course.lectures.filter(
     (lec) => lec.status === "completed"
   ).length;
 
@@ -41,14 +43,15 @@ export default function SubjectLayout({ children }) {
   return (
     <>
       {/* ================= NAVBAR ================= */}
-      <header className="flex items-center justify-between
-                         px-4 md:px-8 lg:px-10
-                         py-4 md:py-6
-                         border-b border-zinc-800">
-
+      <header
+        className="flex items-center justify-between
+                   px-4 md:px-8 lg:px-10
+                   py-4 md:py-6
+                   border-b border-zinc-800"
+      >
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 md:w-10 md:h-10 bg-yellow-400 rounded-full flex items-center justify-center text-black font-bold">
-            Σ
+            C
           </div>
           <h1 className="text-lg md:text-xl font-semibold tracking-wide">
             Koshur Scientist
@@ -68,35 +71,36 @@ export default function SubjectLayout({ children }) {
 
         {/* Back */}
         <Link
-          href="/dashboard/student/subjects"
+          href="/dashboard/student/courses"
           className="flex items-center gap-2 text-zinc-400 hover:text-yellow-400 mb-6 md:mb-8 transition"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Subjects
+          Back to Courses
         </Link>
 
-        {/* ================= SUBJECT HERO ================= */}
-        <div className="rounded-3xl bg-gradient-to-r from-yellow-500/20 to-zinc-900
-                        border border-yellow-500/20
-                        p-6 md:p-10
-                        mb-10 md:mb-12 shadow-lg">
-
+        {/* ================= COURSE HERO ================= */}
+        <div
+          className="rounded-3xl bg-gradient-to-r from-yellow-500/20 to-zinc-900
+                     border border-yellow-500/20
+                     p-6 md:p-10
+                     mb-10 md:mb-12 shadow-lg"
+        >
           <div className="flex flex-col lg:flex-row lg:justify-between gap-8">
 
             {/* Left */}
             <div className="flex gap-5 md:gap-6">
               <div className="w-16 h-16 md:w-20 md:h-20 bg-yellow-400 rounded-full flex items-center justify-center text-black text-2xl md:text-3xl font-bold shadow-lg">
-                {subject.title.charAt(0)}
+                {course.title.charAt(0)}
               </div>
 
               <div>
                 <h2 className="text-2xl md:text-4xl font-bold text-yellow-400 mb-2">
-                  {subject.title}
+                  {course.title}
                 </h2>
                 <p className="text-zinc-400 text-sm md:text-base">
                   Instructor:{" "}
                   <span className="text-white font-medium">
-                    {subject.instructor}
+                    {course.instructor}
                   </span>
                 </p>
               </div>
@@ -145,41 +149,19 @@ export default function SubjectLayout({ children }) {
         </div>
 
         {/* ================= CURRICULUM ================= */}
-        <div className="space-y-4 mb-12 md:mb-16">
-          {subject.lectures.map((lecture) => (
-            <div
-              key={lecture.id}
-              className="flex justify-between items-center p-6 rounded-2xl border border-zinc-800 bg-zinc-900"
-            >
-              <div className="flex items-center gap-4">
-                {lecture.status === "completed" && (
-                  <CheckCircle className="text-green-500 w-6 h-6" />
-                )}
-                {lecture.status === "locked" && (
-                  <Lock className="text-zinc-500 w-6 h-6" />
-                )}
-
-                <div>
-                  <h4 className="font-semibold text-lg">
-                    {lecture.id}. {lecture.title}
-                  </h4>
-                  <p className="text-sm text-zinc-400">
-                    {lecture.duration}
-                  </p>
-                </div>
-              </div>
-
-              <button className="w-12 h-12 rounded-full bg-yellow-400 text-black flex items-center justify-center hover:scale-105 transition">
-                <Play className="w-5 h-5" />
-              </button>
-            </div>
-          ))}
+        <div className="flex items-center gap-2 mb-6">
+          <BookOpen className="w-5 h-5 text-yellow-400" />
+          <h3 className="text-xl md:text-2xl font-semibold">
+            Curriculum
+          </h3>
         </div>
 
-        <div className="mt-14 md:mt-16">{children}</div>
+        <div className="mt-14 md:mt-16">
+          {children}
+        </div>
 
         <footer className="text-center text-zinc-600 text-xs md:text-sm mt-16 pb-10">
-          © 2024 KOSHUR SCIENTIST • {subject.title.toUpperCase()} DEPARTMENT
+          © 2024 KOSHUR SCIENTIST • {course.title.toUpperCase()}
         </footer>
       </div>
     </>

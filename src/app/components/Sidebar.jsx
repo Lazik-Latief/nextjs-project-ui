@@ -18,7 +18,7 @@ export default function Sidebar({ open, setOpen }) {
 
   const items = [
     { label: 'Dashboard', href: '/dashboard/student', icon: LayoutDashboard },
-    { label: 'My Courses', href: '/dashboard/student/myCourses', icon: Library },
+    { label: 'My Courses', href: '/dashboard/student/courses', icon: Library },
     { label: 'My Subjects', href: '/dashboard/student/subjects', icon: BookOpen },
     { label: 'Continue Learning', href: '#', icon: PlayCircle },
     { label: 'Progress', href: '#', icon: BarChart3 },
