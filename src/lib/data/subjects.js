@@ -2,6 +2,7 @@ export const subjects = [
   {
     slug: "english",
     title: "English",
+    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop',
     description: "Grammar, Writing, Literature",
     instructor: "Mr. Ahmad Mir",
     academicYear: "2024",
@@ -15,6 +16,7 @@ export const subjects = [
   {
     slug: "urdu",
     title: "Urdu",
+    image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=800&auto=format&fit=crop',
     description: "Grammar, Writing, Literature",
     instructor: "Mrs. Shazia Noor",
     academicYear: "2024",
@@ -28,6 +30,7 @@ export const subjects = [
     {
     slug: "science",
     title: "Science",
+      image: 'https://plus.unsplash.com/premium_photo-1690297971716-6bbf8ea1d736?q=80&w=1207&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: "Motion, Energy, Waves",
     instructor: "Dr. Aamir Khan",
     academicYear: "2024",
@@ -41,6 +44,7 @@ export const subjects = [
   {
     slug: "math",
     title: "Math",
+    image: 'https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?q=80&w=800&auto=format&fit=crop',
     description: "Algebra, Geometry, Calculus",
     instructor: "Prof. Imran Shah",
     academicYear: "2024",
@@ -54,6 +58,7 @@ export const subjects = [
    {
     slug: "history",
     title: "History",
+    image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=800&auto=format&fit=crop',
     description: "Ancient Civilizations, Modern Events",
     instructor: "Dr. Zainab Khan",
     academicYear: "2024",
